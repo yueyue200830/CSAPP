@@ -1,6 +1,6 @@
 # CSAPP Labs
 
-| Project | version  | status |
+| Project | Version  | Status |
 | :-----: | :------: | :----: |
 | datalab | 12/16/19 |   ✅   |
 | bomb    | 1/12/16  |        |
