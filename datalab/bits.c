@@ -201,6 +201,16 @@ int negate(int x) {
  *   Rating: 3
  */
 int isAsciiDigit(int x) {
+    /*
+    
+    int sign = 0x1 << 31;
+    int upperBound = ~(sign | 0x39);
+    int lowerBound = ~0x30;
+    upperBound = sign & (upperBound + x) >> 31;
+    lowerBound = sign & (lowerBound + x+ 1) >> 31;
+    return !(upperBound | lowerBound);
+
+     */
     int two_ones = (x >> 4) & (x >> 5);
     int is_three = two_ones & !(x >> 6);
     int lg_nine = ((x >> 1) | (x >> 2)) & (x >> 3) & 1;
@@ -245,6 +255,11 @@ int isLessOrEqual(int x, int y) {
  *   Rating: 4 
  */
 int logicalNeg(int x) {
+    /*
+    
+    return ((x | (~x + 1)) >> 31) + 1;
+
+     */
     int a = ~x;
     a = a >> 16 & a;
     a = a >> 8 & a;
@@ -266,6 +281,25 @@ int logicalNeg(int x) {
  *  Rating: 4
  */
 int howManyBits(int x) {
+    /*
+    
+    int b0, b1, b2, b4, b8, b16;
+    int sign = x >> 31;
+    x = (sign & ~x) | (~sign & x);
+
+    b16 = !!(x >> 16) << 4;
+    x = x >> b16;
+    b8 = !!(x >> 8) << 3;
+    x = x >> b8;
+    b4 = !!(x >> 4) << 2;
+    x = x >> b4;
+    b2 = !!(x >> 2) << 1;
+    x = x >> b2;
+    b1 = !!(x >> 1);
+    x = x >> b1;
+    b0 = x;
+    return b16 + b8 + b4 + b2 + b1 + b0 + 1;
+     */
     int symbol = ~((x >> 31) & 1) + 1;
     int a = (symbol & ~x) | (~symbol & x);
     int r = 1;
